@@ -30,8 +30,7 @@
   ],
   "dependencies": {
     "graceful-fs": "^4.1.11",
-    "junk": "^1.0.3",
-    "pinkie-promise": "^2.0.1"
+    "junk": "^1.0.3"
   },
   "devDependencies": {
     "@shinnn/eslint-config-node": "^4.0.0",
