@@ -1,27 +1,27 @@
 'use strict';
 
-var isNotJunk = require('junk').not;
-var readdir = require('graceful-fs').readdir;
+const isActualContent = require('junk').not;
+const readdir = require('graceful-fs').readdir;
 
-var PATH_ERROR = 'Expected a directory path';
+const PATH_ERROR = 'Expected a directory path';
 
 module.exports = function readdirClean(dir) {
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
     if (typeof dir !== 'string') {
-      throw new TypeError(PATH_ERROR + ' (string), but got ' + dir + '.');
+      throw new TypeError(`${PATH_ERROR} (string), but got ${dir}.`);
     }
 
     if (dir.length === 0) {
-      throw new TypeError(PATH_ERROR + ', but got \'\' (empty string).');
+      throw new TypeError(`${PATH_ERROR}, but got '' (empty string).`);
     }
 
-    readdir(dir, function(err, paths) {
+    readdir(dir, (err, paths) => {
       if (err) {
         reject(err);
         return;
       }
 
-      resolve(paths.filter(isNotJunk));
+      resolve(paths.filter(isActualContent));
     });
   });
 };

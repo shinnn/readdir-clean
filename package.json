@@ -5,7 +5,7 @@
   "repository": "shinnn/readdir-clean",
   "author": "Shinnosuke Watanabe (https://github.com/shinnn)",
   "scripts": {
-    "pretest": "eslint --format=codeframe index.js test.js",
+    "pretest": "eslint --fix --format=codeframe index.js test.js",
     "test": "nyc node test.js"
   },
   "license": "CC0-1.0",
@@ -30,21 +30,17 @@
   ],
   "dependencies": {
     "graceful-fs": "^4.1.11",
-    "junk": "^1.0.3"
+    "junk": "^2.1.0"
   },
   "devDependencies": {
     "@shinnn/eslint-config-node": "^4.0.0",
-    "eslint": "^4.0.0",
+    "eslint": "^4.1.1",
     "nyc": "^11.0.2",
     "rmfr": "^1.0.3",
     "tape": "^4.6.3",
     "write-file-atomically": "^1.0.0"
   },
   "eslintConfig": {
-    "extends": "@shinnn/node",
-    "rules": {
-      "no-var": "off",
-      "prefer-arrow-callback": "off"
-    }
+    "extends": "@shinnn/node"
   }
 }
