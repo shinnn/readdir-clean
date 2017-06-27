@@ -30,6 +30,7 @@
   ],
   "dependencies": {
     "graceful-fs": "^4.1.11",
+    "inspect-with-kind": "^1.0.2",
     "junk": "^2.1.0"
   },
   "devDependencies": {

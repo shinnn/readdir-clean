@@ -39,10 +39,10 @@ test('readdirClean()', async t => {
 test('Argument validation', t => {
   t.plan(2);
 
-  readdirClean(true).catch(err => {
+  readdirClean(/^/).catch(err => {
     t.equal(
       err.toString(),
-      'TypeError: Expected a directory path (string), but got true.',
+      'TypeError: Expected a directory path (string), but got /^/ .',
       'should invalidate a non-string value.'
     );
   });

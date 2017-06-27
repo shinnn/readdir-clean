@@ -21,7 +21,7 @@ const readdirClean = require('readdir-clean');
     'Thumbs.db'
   ] */
 
-  await readdirClean();
+  await readdirClean('.');
   /*=> [
     'a.txt',
     'b.txt'
