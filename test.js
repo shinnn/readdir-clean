@@ -37,12 +37,12 @@ test('readdirClean()', async t => {
 });
 
 test('Argument validation', t => {
-  t.plan(2);
+  t.plan(4);
 
   readdirClean(/^/).catch(err => {
     t.equal(
       err.toString(),
-      'TypeError: Expected a directory path (string), but got /^/ .',
+      'TypeError: Expected a directory path (string), but got /^/ (regexp).',
       'should invalidate a non-string value.'
     );
   });
@@ -52,6 +52,22 @@ test('Argument validation', t => {
       err.toString(),
       'TypeError: Expected a directory path, but got \'\' (empty string).',
       'should invalidate an empty string.'
+    );
+  });
+
+  readdirClean().catch(err => {
+    t.equal(
+      err.toString(),
+      'RangeError: Expected 1 argument (string), but got no arguments instead.',
+      'should invalidate no arguments.'
+    );
+  });
+
+  readdirClean('1', '2').catch(err => {
+    t.equal(
+      err.toString(),
+      'RangeError: Expected 1 argument (string), but got 2 arguments instead.',
+      'should invalidate too many arguments.'
     );
   });
 });
