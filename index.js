@@ -1,10 +1,13 @@
 'use strict';
 
+const {promisify} = require('util');
+
 const inspectWithKind = require('inspect-with-kind');
 const isActualContent = require('junk').not;
 const {readdir} = require('graceful-fs');
 
 const PATH_ERROR = 'Expected a directory path';
+const promisifiedReaddir = promisify(readdir);
 
 module.exports = async function readdirClean(...args) {
   const argLen = args.length;
@@ -25,16 +28,5 @@ module.exports = async function readdirClean(...args) {
     throw new TypeError(`${PATH_ERROR}, but got '' (empty string).`);
   }
 
-  const results = await new Promise((resolve, reject) => {
-    readdir(dir, (err, paths) => {
-      if (err) {
-        reject(err);
-        return;
-      }
-
-      resolve(paths);
-    });
-  });
-
-  return results.filter(isActualContent);
+  return (await promisifiedReaddir(dir)).filter(isActualContent);
 };
