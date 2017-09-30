@@ -45,7 +45,7 @@ const readdirClean = require('readdir-clean');
 
 ### readdirClean(*path*)
 
-*path*: `string` (directory path)  
+*path*: `string`, `Buffer` or `URL` (directory path)  
 Return: `Promise<Array<string>>`
 
 Similar to [Node.js](https://nodejs.org) built-in `fs.readdir`, but different in the following points:

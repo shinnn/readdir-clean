@@ -28,7 +28,7 @@ test('readdirClean()', async t => {
   );
 
   try {
-    await readdirClean('__this_directory_does_not_exist__');
+    await readdirClean(Buffer.from('__this_directory_does_not_exist__'));
   } catch (e) {
     t.equal(e.code, 'ENOENT', 'should fail when it cannot get contents.');
   }
@@ -37,21 +37,13 @@ test('readdirClean()', async t => {
 });
 
 test('Argument validation', t => {
-  t.plan(4);
+  t.plan(3);
 
   readdirClean(/^/).catch(err => {
     t.equal(
       err.toString(),
-      'TypeError: Expected a directory path (string), but got /^/ (regexp).',
+      'TypeError: path must be a string or Buffer',
       'should invalidate a non-string value.'
-    );
-  });
-
-  readdirClean('').catch(err => {
-    t.equal(
-      err.toString(),
-      'TypeError: Expected a directory path, but got \'\' (empty string).',
-      'should invalidate an empty string.'
     );
   });
 

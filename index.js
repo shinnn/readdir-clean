@@ -2,11 +2,9 @@
 
 const {promisify} = require('util');
 
-const inspectWithKind = require('inspect-with-kind');
 const isActualContent = require('junk').not;
 const {readdir} = require('graceful-fs');
 
-const PATH_ERROR = 'Expected a directory path';
 const promisifiedReaddir = promisify(readdir);
 
 module.exports = async function readdirClean(...args) {
@@ -18,15 +16,5 @@ module.exports = async function readdirClean(...args) {
     } arguments instead.`);
   }
 
-  const [dir] = args;
-
-  if (typeof dir !== 'string') {
-    throw new TypeError(`${PATH_ERROR} (string), but got ${inspectWithKind(dir)}.`);
-  }
-
-  if (dir.length === 0) {
-    throw new TypeError(`${PATH_ERROR}, but got '' (empty string).`);
-  }
-
-  return (await promisifiedReaddir(dir)).filter(isActualContent);
+  return (await promisifiedReaddir(args[0])).filter(isActualContent);
 };
