@@ -11,7 +11,7 @@ module.exports = async function readdirClean(...args) {
   const argLen = args.length;
 
   if (argLen !== 1) {
-    throw new RangeError(`Expected 1 argument (string), but got ${
+    throw new RangeError(`Expected 1 argument (<string|Buffer|URL>), but got ${
       argLen === 0 ? 'no' : argLen
     } arguments instead.`);
   }

@@ -50,7 +50,7 @@ test('Argument validation', t => {
   readdirClean().catch(err => {
     t.equal(
       err.toString(),
-      'RangeError: Expected 1 argument (string), but got no arguments instead.',
+      'RangeError: Expected 1 argument (<string|Buffer|URL>), but got no arguments instead.',
       'should invalidate no arguments.'
     );
   });
@@ -58,7 +58,7 @@ test('Argument validation', t => {
   readdirClean('1', '2').catch(err => {
     t.equal(
       err.toString(),
-      'RangeError: Expected 1 argument (string), but got 2 arguments instead.',
+      'RangeError: Expected 1 argument (<string|Buffer|URL>), but got 2 arguments instead.',
       'should invalidate too many arguments.'
     );
   });
