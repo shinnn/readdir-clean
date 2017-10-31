@@ -1,6 +1,6 @@
 # readdir-clean
 
-[![NPM version](https://img.shields.io/npm/v/readdir-clean.svg)](https://www.npmjs.com/package/readdir-clean)
+[![npm version](https://img.shields.io/npm/v/readdir-clean.svg)](https://www.npmjs.com/package/readdir-clean)
 [![Build Status](https://travis-ci.org/shinnn/readdir-clean.svg?branch=master)](https://travis-ci.org/shinnn/readdir-clean)
 [![Coverage Status](https://img.shields.io/coveralls/shinnn/readdir-clean.svg)](https://coveralls.io/github/shinnn/readdir-clean?branch=master)
 
@@ -31,7 +31,7 @@ const readdirClean = require('readdir-clean');
 
 ## Installation
 
-[Use npm.](https://docs.npmjs.com/cli/install)
+[Use](https://docs.npmjs.com/cli/install) [npm](https://docs.npmjs.com/getting-started/what-is-npm).
 
 ```
 npm install readdir-clean
@@ -45,7 +45,7 @@ const readdirClean = require('readdir-clean');
 
 ### readdirClean(*path*)
 
-*path*: `string`, `Buffer` or `URL` (directory path)  
+*path*: `string` [`Buffer`](https://nodejs.org/api/buffer.html#buffer_class_buffer) [`URL`](https://nodejs.org/api/url.html#url_class_url) (directory path)  
 Return: `Promise<Array<string>>`
 
 Similar to [Node.js](https://nodejs.org) built-in `fs.readdir`, but different in the following points:
