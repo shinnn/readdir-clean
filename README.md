@@ -64,4 +64,4 @@ readdirClean('path/to/dir').then(paths => {
 
 ## License
 
-[ISC License](./LICENSE) © 2017 Shinnosuke Watanabe
+[ISC License](./LICENSE) © 2017 - 2018 Shinnosuke Watanabe
