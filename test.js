@@ -1,25 +1,23 @@
 'use strict';
 
 const {join} = require('path');
-const {mkdir} = require('fs');
-const {promisify} = require('util');
+const {mkdir, writeFile} = require('fs').promises;
 
 const readdirClean = require('.');
 const rmfr = require('rmfr');
 const test = require('tape');
-const writeFileAtomically = require('write-file-atomically');
 
 test('readdirClean()', async t => {
 	const tmp = join(__dirname, 'tmp');
 
 	await rmfr(tmp);
-	await promisify(mkdir)(tmp);
+	await mkdir(tmp);
 	await Promise.all([
 		'__MACOSX',
 		'.1',
 		'2',
 		'Thumbs.db'
-	].map(filename => writeFileAtomically(join(tmp, filename))));
+	].map(async filename => writeFile(join(tmp, filename))));
 
 	t.deepEqual(
 		await readdirClean(tmp),
@@ -36,30 +34,39 @@ test('readdirClean()', async t => {
 	t.end();
 });
 
-test('Argument validation', t => {
+test('Argument validation', async t => {
 	t.plan(3);
 
-	readdirClean(/^/).catch(err => {
+	try {
+		await readdirClean(/^/u);
+		t.fail('Unexpectedly succeeded.');
+	} catch ({code}) {
 		t.equal(
-			err.toString(),
-			'TypeError: path must be a string or Buffer',
+			code,
+			'ERR_INVALID_ARG_TYPE',
 			'should invalidate a non-string value.'
 		);
-	});
+	}
 
-	readdirClean().catch(err => {
+	try {
+		await readdirClean();
+		t.fail('Unexpectedly succeeded.');
+	} catch (err) {
 		t.equal(
 			err.toString(),
-			'RangeError: Expected 1 argument (<string|Buffer|URL>), but got no arguments instead.',
+			'RangeError: Expected 1 argument (<string|Buffer|Uint8Array|URL>), but got no arguments instead.',
 			'should invalidate no arguments.'
 		);
-	});
+	}
 
-	readdirClean('1', '2').catch(err => {
+	try {
+		await readdirClean('1', '2');
+		t.fail('Unexpectedly succeeded.');
+	} catch (err) {
 		t.equal(
 			err.toString(),
-			'RangeError: Expected 1 argument (<string|Buffer|URL>), but got 2 arguments instead.',
+			'RangeError: Expected 1 argument (<string|Buffer|Uint8Array|URL>), but got 2 arguments instead.',
 			'should invalidate too many arguments.'
 		);
-	});
+	}
 });
