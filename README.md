@@ -45,13 +45,13 @@ const readdirClean = require('readdir-clean');
 
 ### readdirClean(*path*)
 
-*path*: `string` [`Buffer`](https://nodejs.org/api/buffer.html#buffer_class_buffer) `Uint8Array`  [`URL`](https://nodejs.org/api/url.html#url_class_url) (directory path)  
-Return: `Promise<Array<string>>`
+*path*: `string | Buffer | Uint8Array | URL` (directory path)  
+Return: `Promise<string[]>`
 
 Similar to [Node.js](https://nodejs.org) built-in `fs.promises.readdir()`, but different in the following points:
 
-* Doesn't support `encoding` option
-* The paths are filtered with [`require('junk').not`](https://github.com/sindresorhus/junk#junknotfilename)
+* `encoding` option is not supported.
+* The paths are filtered with [`require('junk').not`](https://github.com/sindresorhus/junk#junknotfilename).
 
 ```javascript
 (async () => {

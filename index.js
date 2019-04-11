@@ -1,11 +1,8 @@
 'use strict';
 
-const {promisify} = require('util');
-const {readdir} = require('fs');
+const {readdir} = require('fs').promises;
 
 const isActualContent = require('junk').not;
-
-const promisifiedReaddir = promisify(readdir);
 
 module.exports = async function readdirClean(...args) {
 	const argLen = args.length;
@@ -16,5 +13,5 @@ module.exports = async function readdirClean(...args) {
 		} arguments instead.`);
 	}
 
-	return (await promisifiedReaddir(args[0])).filter(isActualContent);
+	return (await readdir(args[0])).filter(isActualContent);
 };
